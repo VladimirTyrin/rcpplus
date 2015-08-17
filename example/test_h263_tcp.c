@@ -23,15 +23,21 @@
 #include "rtp.h"
 #include "coder.h"
 
-int main()
+int main(int argc, char **argv)
 {
+	if (argc < 3)
+	{
+		printf("Usage: ./h263_tcp [IP] [PASS]");
+		exit(1);
+	}
+
 	tlog_init(TLOG_MODE_STDERR, TLOG_INFO, NULL);
 
-	rcp_connect("10.25.25.223");
+	rcp_connect(argv[1]);
 
 	start_event_handler();
 
-	client_register(RCP_USER_LEVEL_LIVE, "", RCP_REGISTRATION_TYPE_NORMAL, RCP_ENCRYPTION_MODE_MD5);
+	client_register(RCP_USER_LEVEL_SERVICE, argv[2], RCP_REGISTRATION_TYPE_NORMAL, RCP_ENCRYPTION_MODE_MD5);
 
 	rcp_coder_list encoders, decoders;
 	get_coder_list(RCP_CODER_ENCODER, RCP_MEDIA_TYPE_VIDEO, &encoders, 1);
@@ -72,7 +78,7 @@ int main()
 
 
 	rtp_merge_desc mdesc;
-	rtp_init(RTP_PAYLOAD_TYPE_H263, 1, &mdesc);
+	rtp_init(RTP_PAYLOAD_TYPE_H264, 1, &mdesc);
 
 	time_t end_time = time(NULL) + 10;
 	while (time(NULL) < end_time)

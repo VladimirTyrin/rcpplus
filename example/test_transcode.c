@@ -23,11 +23,11 @@
 #include "rtp.h"
 #include "coder.h"
 
-#include "libavcodec/avcodec.h"
-#include "libavformat/avformat.h"
+#include "ffmpeg/libavcodec/avcodec.h"
+#include "ffmpeg/libavformat/avformat.h"
 //#include "libavfilter/avfilter.h"
-#include "libavutil/avutil.h"
-#include "libswscale/swscale.h"
+#include "ffmpeg/libavutil/avutil.h"
+#include "ffmpeg/libswscale/swscale.h"
 
 //#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 

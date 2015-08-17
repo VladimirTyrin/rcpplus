@@ -512,11 +512,17 @@ int client_connect(rcp_session* session, int method, int media, int flags, rcp_m
 
 	rcp_packet* con_resp = rcp_command(&con_req);
 	if (con_resp == NULL)
+	{
+		printf("con_resp == NULL\n");
 		goto error;
+	}
 
 	TL_INFO("%s", connect_stat_str(con_resp->payload[2]));
 	if (con_resp->payload[2] != 1)
+	{
+		printf("con_resp->payload[2] != 1\n");
 		goto error;
+	}
 
 	session->session_id = con_resp->session_id;
 	TL_DEBUG("session id = %d - %d", con_resp->session_id, session->session_id);
