@@ -119,7 +119,7 @@ int initiate_tcp_stream(rcp_session* session, struct rcp_coder_tag* coder)
 {
 	unsigned char buffer[RCP_MAX_PACKET_LEN];
 
-	int size = sprintf((char*)buffer, "GET /media_tunnel/%08u/%d/%d/%d/%d HTTP 1.0\r\n\r\n", ntohl(session->session_id), coder->media_type, coder->direction, 1, coder->number);
+	int size = sprintf((char*)buffer, "GET /media_tunnel/%08u/%02d/%02d/%02d/%02d HTTP 1.0\r\n\r\n", ntohl(session->session_id), coder->media_type, coder->direction, 1, coder->number);
 	int res = send(session->stream_socket, buffer, size, 0);
 	if (res == -1)
 	{

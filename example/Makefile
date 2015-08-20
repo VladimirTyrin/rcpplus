@@ -7,18 +7,18 @@ LIB = ../librcpplus-1.0.0.a -ltlog-1.0.0 -lpthread -lrt -llzma
 
 FFMPEG = /home/vladimir/Work/github/FFmpeg
 FFMPEGLIB = \
-		$(FFMPEG)/libavdevice/libavdevice.a \
-		$(FFMPEG)/libavformat/libavformat.a \
-		$(FFMPEG)/libavfilter/libavfilter.a \
-		$(FFMPEG)/libavcodec/libavcodec.a \
-		$(FFMPEG)/libswresample/libswresample.a \
-		$(FFMPEG)/libswscale/libswscale.a \
-		$(FFMPEG)/libavutil/libavutil.a \
+		#$(FFMPEG)/libavdevice/libavdevice.a \
+		#$(FFMPEG)/libavformat/libavformat.a \
+		#$(FFMPEG)/libavfilter/libavfilter.a \
+		#$(FFMPEG)/libavcodec/libavcodec.a \
+		#$(FFMPEG)/libswresample/libswresample.a \
+		#$(FFMPEG)/libswscale/libswscale.a \
+		#$(FFMPEG)/libavutil/libavutil.a \
 		 -lz -lm -lpthread -lmp3lame -lfaac -lx264 -lbz2
 		
 FFMPEGINC = -I$(FFMPEG)
 
-all: preset h264_udp h263_udp h263_tcp detect coder ptz play record jpeg audio mpegts test
+all: preset h264_udp h263_udp h263_tcp detect coder ptz jpeg
 
 preset: test_preset.o
 	$(CC) test_preset.o $(LIB) -o preset
@@ -41,10 +41,6 @@ coder: test_coder.o
 ptz: test_ptz.o
 	$(CC) test_ptz.o $(LIB) -o ptz
 	
-play: test_play.o
-	$(CC) -c $(CFLAGS) $(INCS) $(FFMPEGINC) test_play.c -o test_play.o
-	$(CC) test_play.o $(LIB) $(FFMPEGLIB) `sdl-config --cflags --libs` -o play
-	
 record: test_record.o
 	$(CC) -c $(CFLAGS) $(INCS) $(FFMPEGINC) test_record.c -o test_record.o
 	$(CC) test_record.o $(LIB) $(FFMPEGLIB) -o record
@@ -65,4 +61,4 @@ test: test.o
 	$(CC) $(CFLAGS) $(INCS) $(FFMPEGINC) -c $< -o $@ 
 	
 clean:
-	rm -f *.o  h264_udp h263_udp h263_tcp preset detect coder ptz play record jpeg audio mpegts test
+	rm -f *.o  h264_udp h263_udp h263_tcp preset detect coder ptz jpeg

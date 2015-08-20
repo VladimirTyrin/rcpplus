@@ -31,8 +31,9 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 
-	tlog_init(TLOG_MODE_STDERR, TLOG_INFO, NULL);
+	tlog_init(TLOG_MODE_STDERR, TLOG_DEBUG, NULL);
 
+	TL_DEBUG("***");
 	rcp_connect(argv[1]);
 
 	start_event_handler();
@@ -80,7 +81,7 @@ int main(int argc, char **argv)
 	rtp_merge_desc mdesc;
 	rtp_init(RTP_PAYLOAD_TYPE_H264, 1, &mdesc);
 
-	time_t end_time = time(NULL) + 10;
+	time_t end_time = time(NULL) + 1000;
 	while (time(NULL) < end_time)
 	{
 /*
